@@ -1,6 +1,3 @@
-%% Enterprise-grade Energy Project Flowchart
-%% Compliance: ISO 15939 / PMBOK® Guide 7th Ed.
-
 graph TD
     %% Core Components
     subgraph Upstream[Upstream Layer]
