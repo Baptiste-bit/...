@@ -1,24 +1,32 @@
+%% 优化后交易架构（Mermaid代码）
 graph TD
     subgraph 能源贸易层
-    NNPC((NNPC)) -->|石油销售合同| CCOC((CCOC))
-    CCOC -.->|L/C/DLC支付| Bank1[国际银行]
+    A1[NNPC] -->|原油销售合同<br>（FOB条款）| B1[CCOC]
+    B1 -.->|L/C支付<br>（CBN 204指令）| B2[花旗银行拉各斯分行]
     end
 
     subgraph 资金监管层
-    CCOC -.->|不可撤销付款指令| COVEC((COVEC))
-    COVEC -->|设立监管账户| Account[项目专用账户<br>（独立托管）]
-    Account -.->|资金释放审批| JointCommittee[三方协调委员会]
-    JointCommittee -.->|尼日利亚交通部核准| Ministry[尼日利亚交通部]
+    B1 -->|不可撤销付款指令| C1[COVEC]
+    C1 -->|设立监管账户| C2[项目专用账户<br>（渣打银行+区块链存证）]
+    C2 -.->|资金释放审批| C3[三方协调委员会]
+    C3 -.->|交通部核准| C4[交通部]
     end
 
     subgraph 工程实施层
-    COVEC -->|EPC总承包协议| Project[石油基础设施项目]
-    Project -.->|工程进度款申请| Engineer[监理工程师]
-    Engineer -.->|支付证书签发| JointCommittee
+    C1 -->|EPC总承包协议<br>（FIDIC红皮书）| D1[石油基建项目]
+    D1 -.->|进度验收| D2[独立工程师]
+    D2 -.->|支付证书| C3
     end
 
-    style NNPC fill:#4A90E2,stroke:#333
-    style CCOC fill:#4ECDC4,stroke:#333
-    style COVEC fill:#FF6B6B,stroke:#333
-    style Account fill:#FFD93D,stroke:#333
-    style JointCommittee fill:#9B59B6,stroke:#333
+    %% 新增合规模块
+    subgraph 合规控制
+    C2 -.->|反洗钱审查| R1[EFCC]
+    C3 -.->|环境评估| R2[NESREA]
+    C4 -.->|外汇申报| R3[CBN]
+    end
+
+    %% 风险控制增强
+    C2 -->|支付限额| RL1[单笔≤500万美元]
+    C2 -->|资金归集| RL2[每月15日强制回流]
+    style RL1 fill:#FFD700,stroke:#FFA500
+    style RL2 fill:#9B59B6,stroke:#1A3659
