@@ -10,7 +10,7 @@ graph TD
 
     subgraph Midstream[Midstream Layer]
         B1 -->|Irrevocable Payment Instruction| C1[COVEC]
-        C1 -->|Escrow Account Setup| C2[Project Escrow Account<br> (Independent Custody)]
+        C1 -->|Escrow Account Setup| C2[Project Escrow Account]
         C2 -.->|Disbursement Approval| C3[Joint Steering Committee]
         C3 -.->|Regulatory Clearance| C4[Nigeria Ministry of Transport]
         style C1 fill:#FF6B6B,stroke:#1A3659
