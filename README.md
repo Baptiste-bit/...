@@ -1,6 +1,6 @@
 ```mermaid
 graph TD
-    subgraph 能源贸易层
+    subgraph Crude Oil Trade
     A1[NNPC] -->|石油销售合同| B1[CCOC]
     B1 -.->|L/C/DLC支付| B2[国际银行]
     end
