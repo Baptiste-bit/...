@@ -22,3 +22,8 @@ graph LR
     classDef fund fill:#FFD700,stroke:#000,stroke-width:1px,shadow:3px,font-style:italic
     classDef process fill:#E0F3FF,stroke:#007BFF,stroke-width:1px,color:#333,rounded:yes
     linkStyle default stroke:#007BFF,stroke-width:2px,arrowhead=vee,arrowtail=open
+
+    %% 注释标注
+    note1[石油实物流]:::process --> A --> B
+    note2[资金流]:::process --> B --> C --> E --> F
+    note3[协议约束]:::process --> D & A --> C
