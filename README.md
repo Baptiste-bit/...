@@ -1,29 +1,30 @@
-graph LR
-    %% 主体层
-    subgraph 参与主体
-        A[NNPC<br>（尼日利亚国家石油公司）]:::entity
-        B[CCOC<br>（石油采购方）]:::entity
-        C[COVEC<br>（承包商）]:::entity
-        D[尼日利亚交通部<br>（监管方）]:::entity
-    end
-
-    %% 流程层
-    A -->|1. 石油销售| B
-    B -->|2. 结算款支付| C
-    C -->|3. 设立专用账户| E((项目专用账户)):::fund
-    E -->|4. 资金用于EPC施工| F[施工方]:::entity
-
-    %% 协议层
-    D -->|5. 签署<br>三方协议| C
-    A -->|5. 签署<br>三方协议| C
-
-    %% 样式优化
-    classDef entity fill:#007BFF,stroke:#fff,stroke-width:2px,color:white,rounded:yes,font-weight:bold
-    classDef fund fill:#FFD700,stroke:#000,stroke-width:1px,shadow:3px,font-style:italic
-    classDef process fill:#E0F3FF,stroke:#007BFF,stroke-width:1px,color:#333,rounded:yes
-    linkStyle default stroke:#007BFF,stroke-width:2px,arrowhead=vee,arrowtail=open
-
-    %% 注释标注
-    note1[石油实物流]:::process --> A --> B
-    note2[资金流]:::process --> B --> C --> E --> F
-    note3[协议约束]:::process --> D & A --> C
+graph TD  
+    subgraph 能源贸易层  
+    NNPC((NNPC)) -->|销售协议| CCOC((CCOC))  
+    CCOC -.->|L/C支付| Bank1[国际银行]  
+    end  
+  
+    subgraph 资金监管层  
+    CCOC -.->|不可撤销指令| COVEC((COVEC))  
+    COVEC -->|设立监管账户| Account[项目专用账户<br>（独立托管）]  
+    Account -.->|资金释放审批| JointCommittee[三方协调委员会]  
+    JointCommittee -.->|交通部核准| Ministry[交通部]  
+    end  
+  
+    subgraph 工程实施层  
+    COVEC -->|EPC协议| Project[石油基建项目]  
+    Project -.->|进度验收| Engineer[监理工程师]  
+    Engineer -.->|支付证书| JointCommittee  
+    end  
+  
+    %% 高级样式定义  
+    style NNPC fill:#2A5CAA,stroke:#1A3659  
+    style CCOC fill:#4ECDC4,stroke:#1A3659  
+    style COVEC fill:#FF6B6B,stroke:#1A3659  
+    style Account fill:#FFD700,stroke:#1A3659  
+    style JointCommittee fill:#9B59B6,stroke:#1A3659  
+    style Ministry fill:#2C3E50,stroke:#1A3659  
+  
+    %% 交互注释  
+    Account:::flow -->|资金流向| COVEC:::contract  
+    JointCommittee:::flow -.->|监管条件| Account  
