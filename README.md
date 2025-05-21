@@ -1,4 +1,6 @@
- %% Core Components
+```mermaid
+graph TD
+    %% Core Components
     subgraph Upstream[Upstream Layer]
         A1[NNPC] -->|Sales Agreement| B1[CCOC]
         B1 -.->|L/C/DLC| B2[International Bank]
