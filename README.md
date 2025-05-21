@@ -1,4 +1,3 @@
-%% 交易架构流程图 - Mermaid代码
 graph TD
     %% 能源贸易层
     subgraph 能源贸易层
